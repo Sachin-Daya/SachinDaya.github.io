@@ -1,1 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sachin Daya — E‑Portfolio</title>
+  <meta name="description" content="Engineering e‑portfolio of Sachin Daya — projects, experience, artefacts, skills, and contact." />
+  <meta property="og:title" content="Sachin Daya — E‑Portfolio" />
+  <meta property="og:description" content="Projects, experience, artefacts, and contact." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/preview.jpg" />
+  <link rel="icon" href="assets/favicon.ico" />
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #0f141a;
+      --muted: #9fb0c0;
+      --text: #e7eef5;
+      --accent: #4fb3ff;
+      --accent-2: #7cf0bd;
+      --border: #1c2430;
+      --shadow: 0 8px 28px rgba(0,0,0,.35);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 16px/1.65 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
+    header { position: sticky; top: 0; backdrop-filter: blur(8px); background: color-mix(in srgb, var(--bg) 80%, transparent); border-bottom: 1px solid var(--border); z-index: 20; }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { font-weight: 700; letter-spacing: 0.3px; }
+    .menu { display: flex; gap: 1rem; }
+    .menu a { padding: .5rem .75rem; border-radius: 8px; }
+    .menu a:hover { background: var(--panel); text-decoration: none; }
+    .hamburger { display: none; font-size: 1.5rem; background: none; border: 0; color: var(--text); }
+
+    .hero { display: grid; grid-template-columns: 1.25fr .75fr; gap: 2rem; padding: 4rem 0 2rem; align-items: center; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow); }
+    .hero .summary { padding: 2rem; }
+    .kicker { color: var(--muted); font-weight: 600; letter-spacing: .2px; text-transform: uppercase; font-size: .8rem; }
+    h1 { font-size: clamp(1.8rem, 2.2vw + 1.2rem, 3rem); margin: .4rem 0 1rem; line-height: 1.2; }
+    .lead { color: #cfe0f0; margin-bottom: 1.25rem; }
+    .cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
+    .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .65rem .95rem; border-radius: 12px; border: 1px solid var(--border); background: #121922; color: var(--text); font-weight: 600; }
+    .btn:hover { background: #0e151d; text-decoration: none; }
+    .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #00233a; border: none; }
+
+    .avatar { overflow: hidden; border-radius: 16px; }
+    .avatar img { width: 100%; height: auto; display: block; }
+
+    section { padding: 2.25rem 0; }
+    section h2 { font-size: 1.6rem; margin: 0 0 .75rem; }
+    section .sub { color: var(--muted); margin: 0 0 1.25rem; }
+
+    .chips { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .chip { background: #101722; border: 1px solid var(--border); color: #c6d6e6; padding: .35rem .6rem; border-radius: 999px; font-size: .9rem; }
+
+    .grid { display: grid; gap: 1rem; }
+    .grid.projects { grid-template-columns: repeat(3, 1fr); }
+    .grid.artifacts { grid-template-columns: repeat(4, 1fr); }
+    .grid.two { grid-template-columns: repeat(2, 1fr); }
+    .grid.one { grid-template-columns: 1fr; }
+
+    .project, .artifact, .xp { padding: 1rem; }
+    .project h3, .xp h3 { margin: .25rem 0 .25rem; font-size: 1.1rem; }
+    .meta { color: var(--muted); font-size: .9rem; }
+    .thumb { aspect-ratio: 16/9; background: #0c121a; border: 1px dashed var(--border); border-radius: 12px; display: grid; place-items: center; color: var(--muted); overflow: hidden; }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .xp ul { margin: .35rem 0 0 1rem; }
+    .xp li { margin: .25rem 0; }
+
+    .gallery { display: grid; gap: .75rem; grid-template-columns: repeat(3, 1fr); }
+    .gallery a { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); display: block; }
+    .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 1/1; }
+
+    footer { border-top: 1px solid var(--border); padding: 2rem 0; color: var(--muted); }
+
+    .note { font-size: .9rem; color: var(--muted); }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid.projects { grid-template-columns: repeat(2, 1fr); }
+      .grid.artifacts { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .menu { display: none; position: absolute; right: 1rem; top: 64px; background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: .5rem; flex-direction: column; min-width: 220px; }
+      .hamburger { display: inline-block; }
+      .grid.projects { grid-template-columns: 1fr; }
+      .grid.artifacts { grid-template-columns: repeat(2, 1fr); }
+      .gallery { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">Sachin Daya</div>
+      <nav id="menu" class="menu" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#artifacts">Artefacts</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="card summary">
+        <div class="kicker">Engineering E‑Portfolio</div>
+        <h1>Electrical & Computer Engineering graduate
+          <span style="display:block;font-size:1rem;font-weight:500;color:var(--muted);margin-top:.35rem;">Control systems • Embedded systems • Data & ML</span>
+        </h1>
+        <p class="lead">I design and build practical solutions—from robust control and simulation to ESP32‑based IoT prototypes. I value clear thinking, reliable execution, and human‑centred design.</p>
+        <div class="cta">
+          <a class="btn primary" href="cv/Sachin_Daya_CV.pdf" download>Download CV</a>
+          <a class="btn" href="mailto:sachin@example.com">Email</a>
+          <a class="btn" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+        <p class="note" style="margin-top:1rem;">Tip: replace placeholder links/images; keep artefacts under <code>/assets</code> and your CV under <code>/cv</code>.</p>
+      </div>
+      <div class="avatar card">
+        <img src="assets/portrait.jpg" alt="Portrait of Sachin Daya" />
+      </div>
+    </section>
+
+    <section id="about">
+      <h2>About</h2>
+      <p class="sub">Who I am and what I care about.</p>
+      <div class="card project">
+        <p>I’m an Engineering graduate from the University of Cape Town with hands‑on experience across control, embedded, and applied ML. Recent work includes a robust control design using Nichols charts and QFT, an ESP32‑CAM + RFID attendance prototype that uploads tagged photos, and early exploration of AR for surgical navigation.</p>
+        <p>Beyond the lab, I’m a Springbok Scout and enjoy mentoring and building communities. I’m currently exploring how human‑centred design and data can improve reliability and safety in tech.</p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <p class="sub">Tools & technologies I’ve used in coursework, projects, and internships.</p>
+      <div class="chips">
+        <span class="chip">MATLAB/Simulink</span>
+        <span class="chip">QFT • Nichols</span>
+        <span class="chip">Python (NumPy, pandas)</span>
+        <span class="chip">C/C++ (Arduino/ESP32)</span>
+        <span class="chip">Embedded (ESP32‑CAM, MFRC522)</span>
+        <span class="chip">Git & GitHub</span>
+        <span class="chip">Linux • Bash</span>
+        <span class="chip">LaTeX</span>
+        <span class="chip">3D Slicer (DICOM)</span>
+        <span class="chip">OpenCV (basics)</span>
+        <span class="chip">SQL (basics)</span>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <p class="sub">Selected projects highlighting engineering decisions and outcomes.</p>
+      <div class="grid projects">
+        <article class="card project">
+          <div class="thumb"><img src="assets/esp32-rfid.jpg" alt="ESP32‑CAM + RFID prototype" /></div>
+          <h3>ESP32‑CAM + RFID Attendance Capture</h3>
+          <p class="meta">Arduino • ESP32 • MFRC522 • Google Apps Script</p>
+          <p>Scans RFID tag, captures a photo, and uploads to Drive with UID‑based filename. Built a registration/attendance mode without physical buttons. <a href="#artifacts">See artefacts</a>.</p>
+          <p><a href="https://github.com/yourusername/esp32-rfid-attendance" target="_blank" rel="noopener">Code repo</a></p>
+        </article>
+        <article class="card project">
+          <div class="thumb"><img src="assets/qft.jpg" alt="Nichols chart QFT design plots" /></div>
+          <h3>Robust Control via QFT on Delay Plant</h3>
+          <p class="meta">MATLAB • QFT • Time delay</p>
+          <p>Designed a controller for <code>P(s)=k e^{-sT}/(s+1)</code> with <code>k∈[1,4]</code>, <code>T∈[0,0.1]</code>. Met bounds on tracking and disturbance rejection with margins. </p>
+          <p><a href="assets/qft-report.pdf" target="_blank" rel="noopener">Report (PDF)</a></p>
+        </article>
+        <article class="card project">
+          <div class="thumb"><img src="assets/ar-surgery.jpg" alt="Concept mockup of AR surgical navigation" /></div>
+          <h3>AR for Surgical Navigation (Exploratory)</h3>
+          <p class="meta">3D Slicer • DICOM • Unity/AR</p>
+          <p>Explored real‑time ultrasound registration with pre‑op MRI; automated 3D model generation and AR overlays. </p>
+          <p><a href="assets/ultrasound-ar-notes.pdf" target="_blank" rel="noopener">Notes (PDF)</a></p>
+        </article>
+      </div>
+    </section>
+
+    <section id="artifacts">
+      <h2>Artefacts</h2>
+      <p class="sub">Evidence of learning and outcomes. Click to open.</p>
+      <div class="grid artifacts">
+        <a class="card artifact" href="assets/esp32-schematic.pdf" target="_blank" rel="noopener">
+          <div class="thumb">ESP32 Schematic (PDF)</div>
+        </a>
+        <a class="card artifact" href="assets/attendance-demo.mp4" target="_blank" rel="noopener">
+          <div class="thumb">Attendance Demo (Video)</div>
+        </a>
+        <a class="card artifact" href="assets/qft-report.pdf" target="_blank" rel="noopener">
+          <div class="thumb">QFT Report (PDF)</div>
+        </a>
+        <a class="card artifact" href="assets/training-report.pdf" target="_blank" rel="noopener">
+          <div class="thumb">Practical Training Report (PDF)</div>
+        </a>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2>Experience & Leadership</h2>
+      <div class="grid two">
+        <div class="card xp">
+          <h3>Africa Armature Windings — Technician</h3>
+          <p class="meta">Jan 2025 • Durban</p>
+          <ul>
+            <li>Hands‑on diagnostics and repair workflows; quality checks and instrumentation.</li>
+            <li>Authored a practical training report; focused on safety and process improvement.</li>
+          </ul>
+        </div>
+        <div class="card xp">
+          <h3>Just ICT — IT Intern</h3>
+          <p class="meta">Dates • Location</p>
+          <ul>
+            <li>Supported troubleshooting, documentation, and basic automation scripts.</li>
+            <li>Contributed to structured asset tracking and client support.</li>
+          </ul>
+        </div>
+        <div class="card xp">
+          <h3>Springbok Scout — Leadership</h3>
+          <p class="meta">2011–2021</p>
+          <ul>
+            <li>Led teams; planned expeditions; prioritised risk management and mentoring.</li>
+          </ul>
+        </div>
+        <div class="card xp">
+          <h3>Academics & Awards</h3>
+          <ul>
+            <li>UCT — Electrical & Computer Engineering</li>
+            <li>Top school achiever (7 distinctions); prefect</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p class="sub">Prefer email or LinkedIn.</p>
+      <div class="card project">
+        <p><strong>Email:</strong> <a href="mailto:sachin@example.com">sachin@example.com</a></p>
+        <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener">linkedin.com/in/yourprofile</a></p>
+        <p><strong>GitHub:</strong> <a href="https://github.com/yourusername" target="_blank" rel="noopener">github.com/yourusername</a></p>
+        <p class="note">For a contact form, use a service like Formspree or Netlify Forms and link it here.</p>
+      </div>
+    </section>
+
+    <section aria-label="Checklist" style="margin-top:2rem;">
+      <div class="card project">
+        <h2>Submission Checklist</h2>
+        <ul>
+          <li>Replace placeholder text, images, and links.</li>
+          <li>Upload artefacts to <code>/assets</code> and update links.</li>
+          <li>Add your CV as <code>/cv/Sachin_Daya_CV.pdf</code>.</li>
+          <li>Run a spell check; read aloud for clarity.</li>
+          <li>Test links and navigation on mobile and desktop.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Sachin Daya. Built with GitHub Pages.</div>
+  </footer>
+
+  <script>
+    function toggleMenu(){
+      var m = document.getElementById('menu');
+      var s = getComputedStyle(m);
+      if (s.display === 'none') { m.style.display = 'flex'; } else { m.style.display = 'none'; }
+    }
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
 
