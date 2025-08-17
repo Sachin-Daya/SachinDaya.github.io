@@ -12,40 +12,42 @@
   <link rel="icon" href="assets/favicon.ico" />
   <style>
     :root {
-      --bg: #0b0f14;
-      --panel: #0f141a;
-      --muted: #9fb0c0;
-      --text: #e7eef5;
-      --accent: #4fb3ff;
-      --accent-2: #7cf0bd;
-      --border: #1c2430;
-      --shadow: 0 8px 28px rgba(0,0,0,.35);
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --muted: #64748b; /* slate-500 */
+      --text: #0f172a;  /* slate-900 */
+      --accent: #2563eb; /* blue-600 */
+      --accent-2: #60a5fa; /* blue-400 */
+      --border: #e5e7eb; /* gray-200 */
+      --shadow: 0 10px 30px rgba(2, 6, 23, 0.06);
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 16px/1.65 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
-    header { position: sticky; top: 0; backdrop-filter: blur(8px); background: color-mix(in srgb, var(--bg) 80%, transparent); border-bottom: 1px solid var(--border); z-index: 20; }
-    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-    .brand { font-weight: 700; letter-spacing: 0.3px; }
-    .menu { display: flex; gap: 1rem; }
-    .menu a { padding: .5rem .75rem; border-radius: 8px; }
-    .menu a:hover { background: var(--panel); text-decoration: none; }
-    .hamburger { display: none; font-size: 1.5rem; background: none; border: 0; color: var(--text); }
 
-    .hero { display: grid; grid-template-columns: 1.25fr .75fr; gap: 2rem; padding: 4rem 0 2rem; align-items: center; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
+
+    header { position: sticky; top: 0; backdrop-filter: saturate(140%) blur(6px); background: rgba(255,255,255,.85); border-bottom: 1px solid var(--border); z-index: 20; }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .brand { font-weight: 800; letter-spacing: .2px; color: #0b1220; }
+    .menu { display: flex; gap: .25rem; }
+    .menu a { padding: .5rem .75rem; border-radius: 10px; color: #0f172a; opacity: .85; }
+    .menu a:hover { background: #f1f5f9; text-decoration: none; opacity: 1; }
+    .hamburger { display: none; font-size: 1.5rem; background: none; border: 0; color: #0f172a; }
+
+    .hero { display: grid; grid-template-columns: 1.25fr .75fr; gap: 2rem; padding: 4rem 0 2.5rem; align-items: center; background: radial-gradient(1200px 420px at 30% -10%, #f8fafc 0%, #ffffff 60%); border-bottom: 1px solid var(--border); }
     .card { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow); }
     .hero .summary { padding: 2rem; }
-    .kicker { color: var(--muted); font-weight: 600; letter-spacing: .2px; text-transform: uppercase; font-size: .8rem; }
-    h1 { font-size: clamp(1.8rem, 2.2vw + 1.2rem, 3rem); margin: .4rem 0 1rem; line-height: 1.2; }
-    .lead { color: #cfe0f0; margin-bottom: 1.25rem; }
+    .kicker { color: var(--muted); font-weight: 700; letter-spacing: .24px; text-transform: uppercase; font-size: .78rem; }
+    h1 { font-size: clamp(2rem, 2.2vw + 1.2rem, 3.2rem); margin: .5rem 0 1rem; line-height: 1.1; }
+    .lead { color: #334155; margin-bottom: 1.25rem; }
     .cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
-    .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .65rem .95rem; border-radius: 12px; border: 1px solid var(--border); background: #121922; color: var(--text); font-weight: 600; }
-    .btn:hover { background: #0e151d; text-decoration: none; }
-    .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #00233a; border: none; }
+    .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 1rem; border-radius: 12px; border: 1px solid var(--border); background: #f8fafc; color: #0f172a; font-weight: 600; }
+    .btn:hover { background: #eef2f7; text-decoration: none; }
+    .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #ffffff; border: none; }
 
-    .avatar { overflow: hidden; border-radius: 16px; }
+    .avatar { overflow: hidden; border-radius: 16px; background: #f1f5f9; border: 1px solid var(--border); }
     .avatar img { width: 100%; height: auto; display: block; }
 
     section { padding: 2.25rem 0; }
@@ -53,7 +55,7 @@
     section .sub { color: var(--muted); margin: 0 0 1.25rem; }
 
     .chips { display: flex; gap: .5rem; flex-wrap: wrap; }
-    .chip { background: #101722; border: 1px solid var(--border); color: #c6d6e6; padding: .35rem .6rem; border-radius: 999px; font-size: .9rem; }
+    .chip { background: #f1f5f9; border: 1px solid var(--border); color: #0f172a; padding: .35rem .6rem; border-radius: 999px; font-size: .9rem; }
 
     .grid { display: grid; gap: 1rem; }
     .grid.projects { grid-template-columns: repeat(3, 1fr); }
@@ -62,9 +64,9 @@
     .grid.one { grid-template-columns: 1fr; }
 
     .project, .artifact, .xp { padding: 1rem; }
-    .project h3, .xp h3 { margin: .25rem 0 .25rem; font-size: 1.1rem; }
+    .project h3, .xp h3 { margin: .25rem 0 .35rem; font-size: 1.1rem; }
     .meta { color: var(--muted); font-size: .9rem; }
-    .thumb { aspect-ratio: 16/9; background: #0c121a; border: 1px dashed var(--border); border-radius: 12px; display: grid; place-items: center; color: var(--muted); overflow: hidden; }
+    .thumb { aspect-ratio: 16/9; background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; display: grid; place-items: center; color: var(--muted); overflow: hidden; }
     .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     .xp ul { margin: .35rem 0 0 1rem; }
@@ -74,7 +76,7 @@
     .gallery a { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); display: block; }
     .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 1/1; }
 
-    footer { border-top: 1px solid var(--border); padding: 2rem 0; color: var(--muted); }
+    footer { border-top: 1px solid var(--border); padding: 2rem 0; color: var(--muted); background: #f8fafc; }
 
     .note { font-size: .9rem; color: var(--muted); }
 
@@ -112,15 +114,15 @@
     <section class="hero">
       <div class="card summary">
         <div class="kicker">Engineering E‑Portfolio</div>
-        <h1>Electrical & Computer Engineering graduate
+        <h1>Engineering student at the University of Cape Town
           <span style="display:block;font-size:1rem;font-weight:500;color:var(--muted);margin-top:.35rem;">Control systems • Embedded systems • Data & ML</span>
         </h1>
         <p class="lead">I design and build practical solutions—from robust control and simulation to ESP32‑based IoT prototypes. I value clear thinking, reliable execution, and human‑centred design.</p>
         <div class="cta">
           <a class="btn primary" href="cv/Sachin_Daya_CV.pdf" download>Download CV</a>
-          <a class="btn" href="mailto:sachin@example.com">Email</a>
+          <a class="btn" href="mailto:sachin.daya13@gmail.com">Email</a>
           <a class="btn" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
-          <a class="btn" href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://www.linkedin.com/in/sachin-dava-7a4b33343" target="_blank" rel="noopener">LinkedIn</a>
         </div>
         <p class="note" style="margin-top:1rem;">Tip: replace placeholder links/images; keep artefacts under <code>/assets</code> and your CV under <code>/cv</code>.</p>
       </div>
@@ -133,26 +135,26 @@
       <h2>About</h2>
       <p class="sub">Who I am and what I care about.</p>
       <div class="card project">
-        <p>I’m an Engineering graduate from the University of Cape Town with hands‑on experience across control, embedded, and applied ML. Recent work includes a robust control design using Nichols charts and QFT, an ESP32‑CAM + RFID attendance prototype that uploads tagged photos, and early exploration of AR for surgical navigation.</p>
-        <p>Beyond the lab, I’m a Springbok Scout and enjoy mentoring and building communities. I’m currently exploring how human‑centred design and data can improve reliability and safety in tech.</p>
+        <p>I’m an aspiring Electrical and Computer Engineer with a strong academic foundation and a passion for applying technical knowledge in real‑world settings. I’m dedicated and hardworking, eager to learn and grow within a team environment. My experience in Scouts has equipped me with effective communication, teamwork, and leadership. I bring an analytical mindset that helps me solve problems, think creatively, and tackle complex challenges with confidence and precision.</p>
       </div>
     </section>
 
     <section id="skills">
       <h2>Skills</h2>
-      <p class="sub">Tools & technologies I’ve used in coursework, projects, and internships.</p>
+      <p class="sub">Tools, techniques, and strengths from coursework, projects, and internships.</p>
       <div class="chips">
-        <span class="chip">MATLAB/Simulink</span>
-        <span class="chip">QFT • Nichols</span>
-        <span class="chip">Python (NumPy, pandas)</span>
-        <span class="chip">C/C++ (Arduino/ESP32)</span>
-        <span class="chip">Embedded (ESP32‑CAM, MFRC522)</span>
+        <span class="chip">Hardware Installation</span>
+        <span class="chip">Software Development</span>
+        <span class="chip">MATLAB</span>
+        <span class="chip">Java</span>
+        <span class="chip">Python</span>
+        <span class="chip">Project Management</span>
+        <span class="chip">Public Speaking</span>
+        <span class="chip">Communication</span>
         <span class="chip">Git & GitHub</span>
+        <span class="chip">Embedded (ESP32‑CAM, MFRC522)</span>
         <span class="chip">Linux • Bash</span>
         <span class="chip">LaTeX</span>
-        <span class="chip">3D Slicer (DICOM)</span>
-        <span class="chip">OpenCV (basics)</span>
-        <span class="chip">SQL (basics)</span>
       </div>
     </section>
 
@@ -204,36 +206,44 @@
     </section>
 
     <section id="experience">
-      <h2>Experience & Leadership</h2>
+      <h2>Experience, Education & Leadership</h2>
       <div class="grid two">
         <div class="card xp">
-          <h3>Africa Armature Windings — Technician</h3>
-          <p class="meta">Jan 2025 • Durban</p>
+          <h3>Africa Armature Winders (Pty) Ltd — Electric Motor Technician</h3>
+          <p class="meta">Jan 2025 • Pinetown, Durban</p>
           <ul>
-            <li>Hands‑on diagnostics and repair workflows; quality checks and instrumentation.</li>
-            <li>Authored a practical training report; focused on safety and process improvement.</li>
+            <li>Conducted basic motor testing and diagnostics to assess functionality.</li>
+            <li>Serviced electric motors.</li>
+            <li>Worked with water pumps, mechanical seals, and motor components.</li>
+            <li>Used precision tools and machinery.</li>
+            <li>Understood windings: basket windings; star‑low amp; delta‑high amp configurations.</li>
           </ul>
         </div>
         <div class="card xp">
-          <h3>Just ICT — IT Intern</h3>
-          <p class="meta">Dates • Location</p>
+          <h3>Just ICT CC — IT Intern</h3>
+          <p class="meta">Jan 2022 – Dec 2024 • Umhlanga, Durban</p>
           <ul>
-            <li>Supported troubleshooting, documentation, and basic automation scripts.</li>
-            <li>Contributed to structured asset tracking and client support.</li>
+            <li>Administered and maintained office networks and servers.</li>
+            <li>Configured and managed email accounts for office users.</li>
+            <li>Performed maintenance, updates, and upgrades on PCs and hard drives to enhance efficiency.</li>
+            <li>Diagnosed and resolved network issues for clients, improving connectivity and performance.</li>
+            <li>Designed and developed software solutions.</li>
+            <li>Installed and configured home Wi‑Fi networks; troubleshot connectivity issues.</li>
           </ul>
         </div>
         <div class="card xp">
-          <h3>Springbok Scout — Leadership</h3>
-          <p class="meta">2011–2021</p>
+          <h3>Education</h3>
           <ul>
-            <li>Led teams; planned expeditions; prioritised risk management and mentoring.</li>
+            <li><strong>University of Cape Town</strong> — BSc Engineering (Electrical & Computer Engineering), 2025. Dean’s List.</li>
+            <li><strong>Northwood School, Durban</strong> — National Senior Certificate, 2021. Academic Honours.</li>
           </ul>
         </div>
         <div class="card xp">
-          <h3>Academics & Awards</h3>
+          <h3>Scouts South Africa — Leadership</h3>
+          <p class="meta">Feb 2011 – Aug 2021 • Durban</p>
           <ul>
-            <li>UCT — Electrical & Computer Engineering</li>
-            <li>Top school achiever (7 distinctions); prefect</li>
+            <li>Springbok Award recipient.</li>
+            <li>Lexden Patrol Leaders Training Unit.</li>
           </ul>
         </div>
       </div>
@@ -243,8 +253,13 @@
       <h2>Contact</h2>
       <p class="sub">Prefer email or LinkedIn.</p>
       <div class="card project">
-        <p><strong>Email:</strong> <a href="mailto:sachin@example.com">sachin@example.com</a></p>
-        <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener">linkedin.com/in/yourprofile</a></p>
+        <p><strong>Email:</strong> <a href="mailto:sachin.daya13@gmail.com">sachin.daya13@gmail.com</a></p>
+        <p><strong>Phone:</strong> 081 546 1401</p>
+        <p><strong>Address:</strong> 12 Bowwood Road, Claremont, Cape Town, 7708, South Africa</p>
+        <p><strong>Languages:</strong> English</p>
+      
+        <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/sachin-dava-7a4b33343" target="_blank" rel="noopener">$1
+        <!-- TODO: Replace with the full, exact LinkedIn URL (PDF truncated with …) -->
         <p><strong>GitHub:</strong> <a href="https://github.com/yourusername" target="_blank" rel="noopener">github.com/yourusername</a></p>
         <p class="note">For a contact form, use a service like Formspree or Netlify Forms and link it here.</p>
       </div>
@@ -278,4 +293,3 @@
   </script>
 </body>
 </html>
-
