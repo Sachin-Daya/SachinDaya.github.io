@@ -36,20 +36,27 @@
     .menu a:hover { background: #f1f5f9; text-decoration: none; opacity: 1; }
     .hamburger { display: none; font-size: 1.5rem; background: none; border: 0; color: #0f172a; }
 
+    /* HERO */
     .hero { display: grid; grid-template-columns: 1.25fr .75fr; gap: 2rem; padding: 4rem 0 2.5rem; align-items: center; background: radial-gradient(1200px 420px at 30% -10%, #f8fafc 0%, #ffffff 60%); border-bottom: 1px solid var(--border); }
     .card { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow); }
     .hero .summary { padding: 2rem; }
     .kicker { color: var(--muted); font-weight: 700; letter-spacing: .24px; text-transform: uppercase; font-size: .78rem; }
-    h1 { font-size: clamp(2rem, 2.2vw + 1.2rem, 3.2rem); margin: .5rem 0 1rem; line-height: 1.1; }
+
+    .name-stack { margin:.35rem 0 1rem; }
+    .name-stack .first { display:block; font-weight:900; font-size: clamp(2.6rem, 4.5vw + 1rem, 4rem); line-height: .95; color:#0b1220; }
+    .name-stack .last { display:block; font-weight:900; font-size: clamp(2.6rem, 4.5vw + 1rem, 4rem); line-height: .95; color: var(--accent); }
+
+    .titleline { font-size: 1.25rem; margin:.4rem 0 1rem; color:#1f2937; }
     .lead { color: #334155; margin-bottom: 1.25rem; }
     .cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
-    .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 1rem; border-radius: 12px; border: 1px solid var(--border); background: #f8fafc; color: #0f172a; font-weight: 600; }
+    .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .8rem 1.05rem; border-radius: 12px; border: 1px solid var(--border); background: #f8fafc; color: #0f172a; font-weight: 600; }
     .btn:hover { background: #eef2f7; text-decoration: none; }
     .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #ffffff; border: none; }
 
     .avatar { overflow: hidden; border-radius: 16px; background: #f1f5f9; border: 1px solid var(--border); }
     .avatar img { width: 100%; height: auto; display: block; }
 
+    /* Sections */
     section { padding: 2.25rem 0; }
     section h2 { font-size: 1.6rem; margin: 0 0 .75rem; }
     section .sub { color: var(--muted); margin: 0 0 1.25rem; }
@@ -72,10 +79,20 @@
     .xp ul { margin: .35rem 0 0 1rem; }
     .xp li { margin: .25rem 0; }
 
-    .gallery { display: grid; gap: .75rem; grid-template-columns: repeat(3, 1fr); }
-    .gallery a { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); display: block; }
-    .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 1/1; }
+    /* Skills bars */
+    .skillbars { display:grid; gap:.75rem; }
+    .bar { display:grid; gap:.4rem; }
+    .bar-label { display:flex; justify-content:space-between; font-size:.9rem; color:#334155; }
+    .bar-track { height:10px; background:#eef2f7; border-radius:999px; overflow:hidden; border:1px solid var(--border); }
+    .bar-fill { height:100%; width: var(--p,0%); background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
 
+    /* Contact form */
+    form.contact { display:grid; gap:.75rem; max-width:720px; }
+    .row { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; }
+    input, textarea, select { padding:.7rem .8rem; border:1px solid var(--border); border-radius:10px; background:#fff; }
+    textarea { min-height:120px; }
+
+    /* Footer */
     footer { border-top: 1px solid var(--border); padding: 2rem 0; color: var(--muted); background: #f8fafc; }
 
     .note { font-size: .9rem; color: var(--muted); }
@@ -84,6 +101,7 @@
       .hero { grid-template-columns: 1fr; }
       .grid.projects { grid-template-columns: repeat(2, 1fr); }
       .grid.artifacts { grid-template-columns: repeat(3, 1fr); }
+      .row { grid-template-columns:1fr; }
     }
     @media (max-width: 640px) {
       .menu { display: none; position: absolute; right: 1rem; top: 64px; background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: .5rem; flex-direction: column; min-width: 220px; }
@@ -100,10 +118,9 @@
       <div class="brand">Sachin Daya</div>
       <nav id="menu" class="menu" aria-label="Primary">
         <a href="#about">About</a>
+        <a href="#education">Education</a>
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
-        <a href="#artifacts">Artefacts</a>
-        <a href="#experience">Experience</a>
         <a href="#contact">Contact</a>
       </nav>
       <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
@@ -111,176 +128,239 @@
   </header>
 
   <main class="container">
+    <!-- HERO -->
     <section class="hero">
       <div class="card summary">
         <div class="kicker">Engineering E‑Portfolio</div>
-        <h1>Electrical and Computer Engineering student at the University of Cape Town
-          <span style="display:block;font-size:1rem;font-weight:500;color:var(--muted);margin-top:.35rem;">Control systems • Embedded systems • Data & ML</span>
-        </h1>
-        <p class="lead">I design and build practical solutions—from robust control and simulation to ESP32‑based IoT prototypes. I value clear thinking, reliable execution, and human‑centred design.</p>
+        <div class="name-stack">
+          <span class="first">Sachin</span>
+          <span class="last">Daya</span>
+        </div>
+        <div class="titleline">Electrical & Computer Engineering Student</div>
+        <p class="lead">Student at the University of Cape Town passionate about innovative technology solutions, circuit design, and embedded systems development.</p>
         <div class="cta">
           <a class="btn primary" href="cv/Sachin_Daya_CV.pdf" download>Download CV</a>
-          <a class="btn" href="mailto:sachin.daya13@gmail.com">Email</a>
-          <a class="btn" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
-          <a class="btn" href="https://www.linkedin.com/in/sachin-dava-7a4b33343" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="#projects">View Projects</a>
         </div>
-        <p class="note" style="margin-top:1rem;">Tip: replace placeholder links/images; keep artefacts under <code>/assets</code> and your CV under <code>/cv</code>.</p>
       </div>
       <div class="avatar card">
         <img src="assets/portrait.jpg" alt="Portrait of Sachin Daya" />
       </div>
     </section>
 
+    <!-- ABOUT -->
     <section id="about">
-      <h2>About</h2>
+      <h2>About Me</h2>
       <p class="sub">Who I am and what I care about.</p>
-      <div class="card project">
-        <p>I’m an aspiring Electrical and Computer Engineer with a strong academic foundation and a passion for applying technical knowledge in real‑world settings. I’m dedicated and hardworking, eager to learn and grow within a team environment. My experience in Scouts has equipped me with effective communication, teamwork, and leadership. I bring an analytical mindset that helps me solve problems, think creatively, and tackle complex challenges with confidence and precision.</p>
+      <div class="grid two">
+        <div class="card project">
+          <p>I’m an aspiring Electrical and Computer Engineer with a strong academic foundation and a passion for applying technical knowledge in real‑world settings. I’m dedicated and hardworking, eager to learn and grow within a team environment. My experience in Scouts has equipped me with effective communication, teamwork, and leadership. I bring an analytical mindset that helps me solve problems, think creatively, and tackle complex challenges with confidence and precision.</p>
+          <div class="grid two" style="margin-top:1rem;">
+            <div>
+              <h3 style="margin:.25rem 0 .5rem;font-size:1rem;">Academic Focus</h3>
+              <ul style="margin:.25rem 0 0 1rem;">
+                <li>Digital Systems / Embedded Systems</li>
+                <li>Signal & Control Systems</li>
+                <li>Applied Data/ML in Engineering</li>
+              </ul>
+            </div>
+            <div>
+              <h3 style="margin:.25rem 0 .5rem;font-size:1rem;">Interests</h3>
+              <ul style="margin:.25rem 0 0 1rem;">
+                <li>IoT Development</li>
+                <li>Robotics & Automation</li>
+                <li>Renewable & Sustainable Tech</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="display:grid;place-items:center;min-height:220px;font-weight:800;font-size:64px;color:var(--accent);">SD</div>
       </div>
     </section>
 
+    <!-- EDUCATION -->
+    <section id="education">
+      <h2>Education</h2>
+      <div class="card xp">
+        <h3>BSc Engineering (Electrical & Computer Engineering)</h3>
+        <p class="meta">University of Cape Town • 2022 – 2025 (expected) • Cape Town, South Africa</p>
+        <p>Pursuing a comprehensive degree combining electrical engineering fundamentals with computer science principles. Coursework includes advanced mathematics, physics, circuit analysis, digital systems, and software engineering.</p>
+        <div class="grid two">
+          <div>
+            <h3 style="margin:.35rem 0 .35rem;font-size:1rem;">Key Modules</h3>
+            <ul style="margin:.25rem 0 0 1rem;">
+              <li>Digital Signal Processing</li>
+              <li>Microprocessor/Embedded Systems</li>
+              <li>Control Systems</li>
+              <li>Computer Networks</li>
+              <li>Electronic Circuit Design</li>
+            </ul>
+          </div>
+          <div>
+            <h3 style="margin:.35rem 0 .35rem;font-size:1rem;">Achievements</h3>
+            <ul style="margin:.25rem 0 0 1rem;">
+              <li>Dean’s Merit List</li>
+              <li>Springbok Scout leadership experience</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
     <section id="skills">
-      <h2>Skills</h2>
-      <p class="sub">Tools, techniques, and strengths from coursework, projects, and internships.</p>
-      <div class="chips">
-        <span class="chip">Hardware Installation</span>
-        <span class="chip">Software Development</span>
-        <span class="chip">MATLAB</span>
-        <span class="chip">Java</span>
-        <span class="chip">Python</span>
-        <span class="chip">Project Management</span>
-        <span class="chip">Public Speaking</span>
-        <span class="chip">Communication</span>
-        <span class="chip">Git & GitHub</span>
-        <span class="chip">Embedded (ESP32‑CAM, MFRC522)</span>
-        <span class="chip">Linux • Bash</span>
-        <span class="chip">LaTeX</span>
+      <h2>Technical Skills</h2>
+      <div class="grid two">
+        <div class="card project">
+          <h3 style="margin:.25rem 0 .5rem;font-size:1rem;">Programming Languages</h3>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">C/C++</span>
+            <span class="chip">MATLAB</span>
+            <span class="chip">Java</span>
+          </div>
+          <h3 style="margin:1rem 0 .5rem;font-size:1rem;">Hardware & Systems</h3>
+          <div class="chips">
+            <span class="chip">Arduino/ESP32</span>
+            <span class="chip">Embedded Systems</span>
+            <span class="chip">Circuit Analysis</span>
+            <span class="chip">PCB (basics)</span>
+          </div>
+          <h3 style="margin:1rem 0 .5rem;font-size:1rem;">Software Tools</h3>
+          <div class="chips">
+            <span class="chip">MATLAB/Simulink</span>
+            <span class="chip">Git & GitHub</span>
+            <span class="chip">Linux • Bash</span>
+            <span class="chip">LaTeX</span>
+          </div>
+          <h3 style="margin:1rem 0 .5rem;font-size:1rem;">Engineering Concepts</h3>
+          <div class="chips">
+            <span class="chip">Signal Processing</span>
+            <span class="chip">Control Systems</span>
+            <span class="chip">Digital Design</span>
+            <span class="chip">IoT</span>
+          </div>
+        </div>
+        <div class="card project">
+          <h3 style="margin:.25rem 0 .5rem;font-size:1rem;">Proficiency (self‑assessed)</h3>
+          <div class="skillbars">
+            <div class="bar" style="--p:85%">
+              <div class="bar-label"><span>Programming (Python, C/C++, MATLAB)</span><span>85%</span></div>
+              <div class="bar-track"><div class="bar-fill"></div></div>
+            </div>
+            <div class="bar" style="--p:80%">
+              <div class="bar-label"><span>Circuit & PCB Design</span><span>80%</span></div>
+              <div class="bar-track"><div class="bar-fill"></div></div>
+            </div>
+            <div class="bar" style="--p:78%">
+              <div class="bar-label"><span>Systems Integration (IoT, Embedded)</span><span>78%</span></div>
+              <div class="bar-track"><div class="bar-fill"></div></div>
+            </div>
+          </div>
+          <p class="note" style="margin-top:.75rem;">Tweak the percentages to match your comfort level.</p>
+        </div>
       </div>
     </section>
 
+    <!-- PROJECTS -->
     <section id="projects">
       <h2>Projects</h2>
-      <p class="sub">Selected projects highlighting engineering decisions and outcomes.</p>
+      <p class="sub">A collection of engineering projects showcasing practical applications of E&CE principles.</p>
       <div class="grid projects">
         <article class="card project">
           <div class="thumb"><img src="assets/esp32-rfid.jpg" alt="ESP32‑CAM + RFID prototype" /></div>
           <h3>ESP32‑CAM + RFID Attendance Capture</h3>
-          <p class="meta">Arduino • ESP32 • MFRC522 • Google Apps Script</p>
-          <p>Scans RFID tag, captures a photo, and uploads to Drive with UID‑based filename. Built a registration/attendance mode without physical buttons. <a href="#artifacts">See artefacts</a>.</p>
-          <p><a href="https://github.com/yourusername/esp32-rfid-attendance" target="_blank" rel="noopener">Code repo</a></p>
+          <p class="meta">Completed • IoT & Embedded</p>
+          <p>Scans RFID tag, captures a photo, and uploads to Drive with UID‑based filename. Registration/attendance mode without physical buttons.</p>
+          <p><strong>Tech:</strong> Arduino, ESP32, MFRC522, Google Apps Script</p>
+          <p><a class="btn" href="https://github.com/yourusername/esp32-rfid-attendance" target="_blank" rel="noopener">Code</a></p>
         </article>
         <article class="card project">
           <div class="thumb"><img src="assets/qft.jpg" alt="Nichols chart QFT design plots" /></div>
           <h3>Robust Control via QFT on Delay Plant</h3>
-          <p class="meta">MATLAB • QFT • Time delay</p>
-          <p>Designed a controller for <code>P(s)=k e^{-sT}/(s+1)</code> with <code>k∈[1,4]</code>, <code>T∈[0,0.1]</code>. Met bounds on tracking and disturbance rejection with margins. </p>
-          <p><a href="assets/qft-report.pdf" target="_blank" rel="noopener">Report (PDF)</a></p>
+          <p class="meta">Completed • Control Systems</p>
+          <p>Designed a controller for <code>P(s)=k e^{-sT}/(s+1)</code> under uncertainty (<code>k∈[1,4]</code>, <code>T∈[0,0.1]</code>) achieving tracking and disturbance rejection bounds.</p>
+          <p><strong>Tech:</strong> MATLAB, QFT</p>
+          <p><a class="btn" href="assets/qft-report.pdf" target="_blank" rel="noopener">Report (PDF)</a></p>
         </article>
         <article class="card project">
           <div class="thumb"><img src="assets/ar-surgery.jpg" alt="Concept mockup of AR surgical navigation" /></div>
           <h3>AR for Surgical Navigation (Exploratory)</h3>
-          <p class="meta">3D Slicer • DICOM • Unity/AR</p>
-          <p>Explored real‑time ultrasound registration with pre‑op MRI; automated 3D model generation and AR overlays. </p>
-          <p><a href="assets/ultrasound-ar-notes.pdf" target="_blank" rel="noopener">Notes (PDF)</a></p>
+          <p class="meta">In Progress • Medical Imaging</p>
+          <p>Exploring real‑time ultrasound registration with pre‑op MRI; automated 3D model generation and AR overlays.</p>
+          <p><strong>Tech:</strong> 3D Slicer, DICOM, Unity/AR</p>
+          <p><a class="btn" href="assets/ultrasound-ar-notes.pdf" target="_blank" rel="noopener">Notes (PDF)</a></p>
         </article>
       </div>
-    </section>
-
-    <section id="artifacts">
-      <h2>Artefacts</h2>
-      <p class="sub">Evidence of learning and outcomes. Click to open.</p>
-      <div class="grid artifacts">
-        <a class="card artifact" href="assets/esp32-schematic.pdf" target="_blank" rel="noopener">
-          <div class="thumb">ESP32 Schematic (PDF)</div>
-        </a>
-        <a class="card artifact" href="assets/attendance-demo.mp4" target="_blank" rel="noopener">
-          <div class="thumb">Attendance Demo (Video)</div>
-        </a>
-        <a class="card artifact" href="assets/qft-report.pdf" target="_blank" rel="noopener">
-          <div class="thumb">QFT Report (PDF)</div>
-        </a>
-        <a class="card artifact" href="assets/training-report.pdf" target="_blank" rel="noopener">
-          <div class="thumb">Practical Training Report (PDF)</div>
-        </a>
+      <div class="cta" style="margin-top:1rem;">
+        <a class="btn" href="https://github.com/yourusername" target="_blank" rel="noopener">View All Projects on GitHub</a>
       </div>
     </section>
 
-    <section id="experience">
-      <h2>Experience, Education & Leadership</h2>
-      <div class="grid two">
-        <div class="card xp">
-          <h3>Africa Armature Winders (Pty) Ltd — Electric Motor Technician</h3>
-          <p class="meta">Jan 2025 • Pinetown, Durban</p>
-          <ul>
-            <li>Conducted basic motor testing and diagnostics to assess functionality.</li>
-            <li>Serviced electric motors.</li>
-            <li>Worked with water pumps, mechanical seals, and motor components.</li>
-            <li>Used precision tools and machinery.</li>
-            <li>Understood windings: basket windings; star‑low amp; delta‑high amp configurations.</li>
-          </ul>
-        </div>
-        <div class="card xp">
-          <h3>Just ICT CC — IT Intern</h3>
-          <p class="meta">Jan 2022 – Dec 2024 • Umhlanga, Durban</p>
-          <ul>
-            <li>Administered and maintained office networks and servers.</li>
-            <li>Configured and managed email accounts for office users.</li>
-            <li>Performed maintenance, updates, and upgrades on PCs and hard drives to enhance efficiency.</li>
-            <li>Diagnosed and resolved network issues for clients, improving connectivity and performance.</li>
-            <li>Designed and developed software solutions.</li>
-            <li>Installed and configured home Wi‑Fi networks; troubleshot connectivity issues.</li>
-          </ul>
-        </div>
-        <div class="card xp">
-          <h3>Education</h3>
-          <ul>
-            <li><strong>University of Cape Town</strong> — BSc Engineering (Electrical & Computer Engineering), 2025. Dean’s List.</li>
-            <li><strong>Northwood School, Durban</strong> — National Senior Certificate, 2021. Academic Honours.</li>
-          </ul>
-        </div>
-        <div class="card xp">
-          <h3>Scouts South Africa — Leadership</h3>
-          <p class="meta">Feb 2011 – Aug 2021 • Durban</p>
-          <ul>
-            <li>Springbok Award recipient.</li>
-            <li>Lexden Patrol Leaders Training Unit.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
+    <!-- CONTACT -->
     <section id="contact">
-      <h2>Contact</h2>
-      <p class="sub">Prefer email or LinkedIn.</p>
-      <div class="card project">
-        <p><strong>Email:</strong> <a href="mailto:sachin.daya13@gmail.com">sachin.daya13@gmail.com</a></p>
-        <p><strong>Phone:</strong> 081 546 1401</p>
-        <p><strong>Address:</strong> 12 Bowwood Road, Claremont, Cape Town, 7708, South Africa</p>
-        <p><strong>Languages:</strong> English</p>
-      
-        <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/sachin-dava-7a4b33343" target="_blank" rel="noopener">$1
-        <!-- TODO: Replace with the full, exact LinkedIn URL (PDF truncated with …) -->
-        <p><strong>GitHub:</strong> <a href="https://github.com/yourusername" target="_blank" rel="noopener">github.com/yourusername</a></p>
-        <p class="note">For a contact form, use a service like Formspree or Netlify Forms and link it here.</p>
+      <h2>Get In Touch</h2>
+      <p class="sub">I’m open to collaborations, internships, and project chats.</p>
+      <div class="grid two">
+        <div class="card project">
+          <h3 style="margin:.25rem 0 .5rem;font-size:1rem;">Contact Information</h3>
+          <p><strong>Email:</strong> <a href="mailto:sachin.daya13@gmail.com">sachin.daya13@gmail.com</a></p>
+          <p><strong>Phone:</strong> 081 546 1401</p>
+          <p><strong>Location:</strong> Cape Town, South Africa</p>
+          <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/sachin-dava-7a4b33343" target="_blank" rel="noopener">linkedin.com/in/sachin-dava-7a4b33343</a></p>
+          <p><strong>GitHub:</strong> <a href="https://github.com/yourusername" target="_blank" rel="noopener">github.com/yourusername</a></p>
+          <p class="note">No postal address is displayed for privacy. For a working contact form on GitHub Pages, wire this form to Formspree, Basin, or Netlify Forms.</p>
+        </div>
+        <div class="card project">
+          <h3 style="margin:.25rem 0 .5rem;font-size:1rem;">Send a Message</h3>
+          <form class="contact" method="post" action="#">
+            <div class="row">
+              <input type="text" name="first_name" placeholder="First name" required>
+              <input type="text" name="last_name" placeholder="Last name" required>
+            </div>
+            <input type="email" name="email" placeholder="Email address" required>
+            <input type="text" name="subject" placeholder="Subject">
+            <textarea name="message" placeholder="Tell me about your project or how we can work together..." required></textarea>
+            <button class="btn primary" type="submit">Send Message</button>
+          </form>
+        </div>
       </div>
     </section>
 
+    <!-- SUBMISSION CHECKLIST (keep for assignment) -->
     <section aria-label="Checklist" style="margin-top:2rem;">
       <div class="card project">
         <h2>Submission Checklist</h2>
         <ul>
-          <li>Replace placeholder text, images, and links.</li>
+          <li>Replace any remaining placeholders in links and images.</li>
           <li>Upload artefacts to <code>/assets</code> and update links.</li>
           <li>Add your CV as <code>/cv/Sachin_Daya_CV.pdf</code>.</li>
           <li>Run a spell check; read aloud for clarity.</li>
-          <li>Test links and navigation on mobile and desktop.</li>
+          <li>Test on mobile and desktop; click every link.</li>
         </ul>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="container">© <span id="year"></span> Sachin Daya. Built with GitHub Pages.</div>
+    <div class="container">
+      <div class="grid two" style="align-items:start;">
+        <div>
+          <strong>Quick Links</strong>
+          <div class="chips" style="margin-top:.5rem;">
+            <a class="chip" href="#about">About</a>
+            <a class="chip" href="#education">Education</a>
+            <a class="chip" href="#projects">Projects</a>
+            <a class="chip" href="#contact">Contact</a>
+          </div>
+        </div>
+        <div>
+          <strong>Get In Touch</strong>
+          <p class="note" style="margin:.5rem 0 0;">sachin.daya13@gmail.com • Cape Town, South Africa • University of Cape Town</p>
+        </div>
+      </div>
+      <div style="margin-top:1rem;">© <span id="year"></span> Sachin Daya. All rights reserved.</div>
+    </div>
   </footer>
 
   <script>
@@ -293,3 +373,4 @@
   </script>
 </body>
 </html>
+
