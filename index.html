@@ -1,284 +1,392 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sachin Daya — E‑Portfolio</title>
-  <meta name="description" content="Engineering e‑portfolio of Sachin Daya — projects, experience, artefacts, skills, and contact." />
-  <meta property="og:title" content="Sachin Daya — E‑Portfolio" />
-  <meta property="og:description" content="Projects, experience, artefacts, and contact." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/preview.jpg" />
-  <link rel="icon" href="assets/favicon.ico" />
-  <style>
-    :root {
-      --bg: #ffffff;
-      --panel: #ffffff;
-      --muted: #64748b; /* slate-500 */
-      --text: #0f172a;  /* slate-900 */
-      --accent: #2563eb; /* blue-600 */
-      --accent-2: #60a5fa; /* blue-400 */
-      --border: #e5e7eb; /* gray-200 */
-      --shadow: 0 10px 30px rgba(2, 6, 23, 0.06);
-    }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 16px/1.65 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
-
-    header { position: sticky; top: 0; backdrop-filter: saturate(140%) blur(6px); background: rgba(255,255,255,.85); border-bottom: 1px solid var(--border); z-index: 20; }
-    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-    .brand { font-weight: 800; letter-spacing: .2px; color: #0b1220; }
-    .menu { display: flex; gap: .25rem; }
-    .menu a { padding: .5rem .75rem; border-radius: 10px; color: #0f172a; opacity: .85; }
-    .menu a:hover { background: #f1f5f9; text-decoration: none; opacity: 1; }
-    .hamburger { display: none; font-size: 1.5rem; background: none; border: 0; color: #0f172a; }
-
-    .hero { display: grid; grid-template-columns: 1.25fr .75fr; gap: 2rem; padding: 4rem 0 2.5rem; align-items: center; background: radial-gradient(1200px 420px at 30% -10%, #f8fafc 0%, #ffffff 60%); border-bottom: 1px solid var(--border); }
-    .card { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow); }
-    .hero .summary { padding: 2rem; }
-    .kicker { color: var(--muted); font-weight: 700; letter-spacing: .24px; text-transform: uppercase; font-size: .78rem; }
-    h1 { font-size: clamp(2rem, 2.2vw + 1.2rem, 3.2rem); margin: .5rem 0 1rem; line-height: 1.1; }
-    .lead { color: #334155; margin-bottom: 1.25rem; }
-    .cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
-    .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 1rem; border-radius: 12px; border: 1px solid var(--border); background: #f8fafc; color: #0f172a; font-weight: 600; }
-    .btn:hover { background: #eef2f7; text-decoration: none; }
-    .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #ffffff; border: none; }
-
-    .avatar { overflow: hidden; border-radius: 16px; background: #f1f5f9; border: 1px solid var(--border); }
-    .avatar img { width: 100%; height: auto; display: block; }
-
-    section { padding: 2.25rem 0; }
-    section h2 { font-size: 1.6rem; margin: 0 0 .75rem; }
-    section .sub { color: var(--muted); margin: 0 0 1.25rem; }
-
-    .chips { display: flex; gap: .5rem; flex-wrap: wrap; }
-    .chip { background: #f1f5f9; border: 1px solid var(--border); color: #0f172a; padding: .35rem .6rem; border-radius: 999px; font-size: .9rem; }
-
-    .grid { display: grid; gap: 1rem; }
-    .grid.projects { grid-template-columns: repeat(3, 1fr); }
-    .grid.artifacts { grid-template-columns: repeat(4, 1fr); }
-    .grid.two { grid-template-columns: repeat(2, 1fr); }
-    .grid.one { grid-template-columns: 1fr; }
-
-    .project, .artifact, .xp { padding: 1rem; }
-    .project h3, .xp h3 { margin: .25rem 0 .35rem; font-size: 1.1rem; }
-    .meta { color: var(--muted); font-size: .9rem; }
-    .thumb { aspect-ratio: 16/9; background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; display: grid; place-items: center; color: var(--muted); overflow: hidden; }
-    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .xp ul { margin: .35rem 0 0 1rem; }
-    .xp li { margin: .25rem 0; }
-
-    .gallery { display: grid; gap: .75rem; grid-template-columns: repeat(3, 1fr); }
-    .gallery a { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); display: block; }
-    .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 1/1; }
-
-    footer { border-top: 1px solid var(--border); padding: 2rem 0; color: var(--muted); background: #f8fafc; }
-
-    .note { font-size: .9rem; color: var(--muted); }
-
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
-      .grid.projects { grid-template-columns: repeat(2, 1fr); }
-      .grid.artifacts { grid-template-columns: repeat(3, 1fr); }
-    }
-    @media (max-width: 640px) {
-      .menu { display: none; position: absolute; right: 1rem; top: 64px; background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: .5rem; flex-direction: column; min-width: 220px; }
-      .hamburger { display: inline-block; }
-      .grid.projects { grid-template-columns: 1fr; }
-      .grid.artifacts { grid-template-columns: repeat(2, 1fr); }
-      .gallery { grid-template-columns: repeat(2, 1fr); }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sachin Daya | Electrical & Computer Engineering Student</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #1a73e8;
+            --secondary-color: #0d47a1;
+            --accent-color: #f5f5f5;
+            --text-color: #333;
+            --light-text: #777;
+            --white: #fff;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        h1, h2, h3, h4 {
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background: var(--primary-color);
+            color: var(--white);
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+        
+        .btn:hover {
+            background: var(--secondary-color);
+            color: var(--white);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color);
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 100px 0 60px;
+            text-align: center;
+        }
+        
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 20px;
+        }
+        
+        .header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+        
+        .header-content h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+        
+        .contact-info {
+            margin-top: 20px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Education & Experience */
+        .timeline-item {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-left: 3px solid var(--primary-color);
+            background: var(--white);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .timeline-item h3 {
+            color: var(--primary-color);
+        }
+        
+        .timeline-item .date {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-item .location {
+            color: var(--light-text);
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .skill-category {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+        
+        .skill-category h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .skill-list {
+            list-style-type: none;
+        }
+        
+        .skill-list li {
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Activities Section */
+        .activity-item {
+            background: var(--white);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .social-links {
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin: 0 10px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2rem;
+            }
+            
+            .header-content h2 {
+                font-size: 1.2rem;
+            }
+            
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <div class="brand">Sachin Daya</div>
-      <nav id="menu" class="menu" aria-label="Primary">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#artifacts">Artefacts</a>
-        <a href="#experience">Experience</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="hero">
-      <div class="card summary">
-        <div class="kicker">Engineering E‑Portfolio</div>
-        <h1>Electrical and Computer Engineering student at the University of Cape Town
-          <span style="display:block;font-size:1rem;font-weight:500;color:var(--muted);margin-top:.35rem;">Control systems • Embedded systems • Data & ML</span>
-        </h1>
-        <p class="lead">I design and build practical solutions—from robust control and simulation to ESP32‑based IoT prototypes. I value clear thinking, reliable execution, and human‑centred design.</p>
-        <div class="cta">
-          <a class="btn primary" href="cv/Sachin_Daya_CV.pdf" download>Download CV</a>
-          <a class="btn" href="mailto:sachin.daya13@gmail.com">Email</a>
-          <a class="btn" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
-          <a class="btn" href="https://www.linkedin.com/in/sachin-daya-7a4b33343?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BMCcOCCTsQgamoJsjsIi6Og%3D%3D" target="_blank" rel="noopener">LinkedIn</a>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <img src="https://via.placeholder.com/180" alt="Sachin Daya" class="profile-img">
+            <div class="header-content">
+                <h1>Sachin Daya</h1>
+                <h2>Electrical & Computer Engineering Student</h2>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i> Claremont, Cape Town, South Africa</p>
+                    <p><i class="fas fa-phone"></i> 081 546 1401</p>
+                    <p><i class="fas fa-envelope"></i> sachin.dayat3@gmail.com</p>
+                </div>
+            </div>
         </div>
-        <p class="note" style="margin-top:1rem;">Tip: replace placeholder links/images; keep artefacts under <code>/assets</code> and your CV under <code>/cv</code>.</p>
-      </div>
-      <div class="avatar card">
-        <img src="assets/portrait.jpg" alt="Portrait of Sachin Daya" />
-      </div>
-    </section>
+    </header>
 
+    <!-- About Section -->
     <section id="about">
-      <h2>About</h2>
-      <p class="sub">Who I am and what I care about.</p>
-      <div class="card project">
-        <p>I’m an aspiring Electrical and Computer Engineer with a strong academic foundation and a passion for applying technical knowledge in real‑world settings. I’m dedicated and hardworking, eager to learn and grow within a team environment. My experience in Scouts has equipped me with effective communication, teamwork, and leadership. I bring an analytical mindset that helps me solve problems, think creatively, and tackle complex challenges with confidence and precision.</p>
-      </div>
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p>Aspiring Electrical and Computer Engineer with a strong academic foundation and a passion for applying technical knowledge in real-world settings. I am a dedicated and hardworking individual who is eager to learn and grow within a team environment. My experience in scouts has equipped me with valuable soft skills such as effective communication, teamwork, and leadership. I bring an analytical mindset that enables me to solve problems, think creatively, and tackle complex challenges with confidence and precision.</p>
+            </div>
+        </div>
     </section>
 
-    <section id="skills">
-      <h2>Skills</h2>
-      <p class="sub">Tools, techniques, and strengths from coursework, projects, and internships.</p>
-      <div class="chips">
-        <span class="chip">Hardware Installation</span>
-        <span class="chip">Software Development</span>
-        <span class="chip">MATLAB</span>
-        <span class="chip">Java</span>
-        <span class="chip">Python</span>
-        <span class="chip">Project Management</span>
-        <span class="chip">Public Speaking</span>
-        <span class="chip">Communication</span>
-        <span class="chip">Git & GitHub</span>
-        <span class="chip">Embedded (ESP32‑CAM, MFRC522)</span>
-        <span class="chip">Linux • Bash</span>
-        <span class="chip">LaTeX</span>
-      </div>
+    <!-- Education Section -->
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="timeline-item">
+                <h3>BSc Engineering (Electrical & Computer Engineering)</h3>
+                <div class="date">2025</div>
+                <div class="location">University of Cape Town, Cape Town</div>
+                <p>Deans List recipient</p>
+            </div>
+            <div class="timeline-item">
+                <h3>National Senior Certificate</h3>
+                <div class="date">2021</div>
+                <div class="location">Northwood School, Durban</div>
+                <p>Academic Honours</p>
+            </div>
+        </div>
     </section>
 
-    <section id="projects">
-      <h2>Projects</h2>
-      <p class="sub">Selected projects highlighting engineering decisions and outcomes.</p>
-      <div class="grid projects">
-        <article class="card project">
-          <div class="thumb"><img src="assets/esp32-rfid.jpg" alt="ESP32‑CAM + RFID prototype" /></div>
-          <h3>ESP32‑CAM + RFID Attendance Capture</h3>
-          <p class="meta">Arduino • ESP32 • MFRC522 • Google Apps Script</p>
-          <p>Scans RFID tag, captures a photo, and uploads to Drive with UID‑based filename. Built a registration/attendance mode without physical buttons. <a href="#artifacts">See artefacts</a>.</p>
-          <p><a href="https://github.com/yourusername/esp32-rfid-attendance" target="_blank" rel="noopener">Code repo</a></p>
-        </article>
-        <article class="card project">
-          <div class="thumb"><img src="assets/qft.jpg" alt="Nichols chart QFT design plots" /></div>
-          <h3>Robust Control via QFT on Delay Plant</h3>
-          <p class="meta">MATLAB • QFT • Time delay</p>
-          <p>Designed a controller for <code>P(s)=k e^{-sT}/(s+1)</code> with <code>k∈[1,4]</code>, <code>T∈[0,0.1]</code>. Met bounds on tracking and disturbance rejection with margins. </p>
-          <p><a href="assets/qft-report.pdf" target="_blank" rel="noopener">Report (PDF)</a></p>
-        </article>
-        <article class="card project">
-          <div class="thumb"><img src="assets/ar-surgery.jpg" alt="Concept mockup of AR surgical navigation" /></div>
-          <h3>AR for Surgical Navigation (Exploratory)</h3>
-          <p class="meta">3D Slicer • DICOM • Unity/AR</p>
-          <p>Explored real‑time ultrasound registration with pre‑op MRI; automated 3D model generation and AR overlays. </p>
-          <p><a href="assets/ultrasound-ar-notes.pdf" target="_blank" rel="noopener">Notes (PDF)</a></p>
-        </article>
-      </div>
-    </section>
-
-    <section id="artifacts">
-      <h2>Artefacts</h2>
-      <p class="sub">Evidence of learning and outcomes. Click to open.</p>
-      <div class="grid artifacts">
-        <a class="card artifact" href="assets/esp32-schematic.pdf" target="_blank" rel="noopener">
-          <div class="thumb">ESP32 Schematic (PDF)</div>
-        </a>
-        <a class="card artifact" href="assets/attendance-demo.mp4" target="_blank" rel="noopener">
-          <div class="thumb">Attendance Demo (Video)</div>
-        </a>
-        <a class="card artifact" href="assets/qft-report.pdf" target="_blank" rel="noopener">
-          <div class="thumb">QFT Report (PDF)</div>
-        </a>
-        <a class="card artifact" href="assets/training-report.pdf" target="_blank" rel="noopener">
-          <div class="thumb">Practical Training Report (PDF)</div>
-        </a>
-      </div>
-    </section>
-
+    <!-- Experience Section -->
     <section id="experience">
-      <h2>Experience, Education & Leadership</h2>
-      <div class="grid two">
-        <div class="card xp">
-          <h3>Africa Armature Winders (Pty) Ltd — Electric Motor Technician</h3>
-          <p class="meta">Jan 2025 • Pinetown, Durban</p>
-          <ul>
-            <li>Conducted basic motor testing and diagnostics to assess functionality.</li>
-            <li>Serviced electric motors.</li>
-            <li>Worked with water pumps, mechanical seals, and motor components.</li>
-            <li>Used precision tools and machinery.</li>
-            <li>Understood windings: basket windings; star‑low amp; delta‑high amp configurations.</li>
-          </ul>
+        <div class="container">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="timeline-item">
+                <h3>IT Intern</h3>
+                <div class="date">January 2022 – December 2024</div>
+                <div class="location">JUST ICT CG, Umhlanga, Durban</div>
+                <ul>
+                    <li>Administered and maintained office networks and servers</li>
+                    <li>Configured and managed email accounts for office users</li>
+                    <li>Performed maintenance, updates, and upgrades on PCs and hard drives</li>
+                    <li>Identified, diagnosed, and resolved network issues for clients</li>
+                    <li>Designed and developed software solutions</li>
+                    <li>Installed and configured home WiFi networks</li>
+                </ul>
+            </div>
+            <div class="timeline-item">
+                <h3>Electric Motor Technician</h3>
+                <div class="date">January 2025</div>
+                <div class="location">Africa Armature Winders (Pty) Ltd, Pinetown, Durban</div>
+                <ul>
+                    <li>Conducted basic motor testing and diagnostics to assess functionality</li>
+                    <li>Serviced electric motors</li>
+                    <li>Gained hands-on experience with water pumps, mechanical seals, and motor components</li>
+                    <li>Utilized precision tools and machinery</li>
+                    <li>Gained understanding of motor windings including basket windings, star-low amp, and delta-high amp configurations</li>
+                </ul>
+            </div>
         </div>
-        <div class="card xp">
-          <h3>Just ICT CC — IT Intern</h3>
-          <p class="meta">Jan 2022 – Dec 2024 • Umhlanga, Durban</p>
-          <ul>
-            <li>Administered and maintained office networks and servers.</li>
-            <li>Configured and managed email accounts for office users.</li>
-            <li>Performed maintenance, updates, and upgrades on PCs and hard drives to enhance efficiency.</li>
-            <li>Diagnosed and resolved network issues for clients, improving connectivity and performance.</li>
-            <li>Designed and developed software solutions.</li>
-            <li>Installed and configured home Wi‑Fi networks; troubleshot connectivity issues.</li>
-          </ul>
-        </div>
-        <div class="card xp">
-          <h3>Education</h3>
-          <ul>
-            <li><strong>University of Cape Town</strong> — BSc Engineering (Electrical & Computer Engineering), 2025. Dean’s List.</li>
-            <li><strong>Northwood School, Durban</strong> — National Senior Certificate, 2021. Academic Honours.</li>
-          </ul>
-        </div>
-        <div class="card xp">
-          <h3>Scouts South Africa — Leadership</h3>
-          <p class="meta">Feb 2011 – Aug 2021 • Durban</p>
-          <ul>
-            <li>Springbok Award recipient.</li>
-            <li>Lexden Patrol Leaders Training Unit.</li>
-          </ul>
-        </div>
-      </div>
     </section>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <p class="sub">Prefer email or LinkedIn.</p>
-      <div class="card project">
-        <p><strong>Email:</strong> <a href="mailto:sachin.daya13@gmail.com">sachin.daya13@gmail.com</a></p>
-        <p><strong>Phone:</strong> 081 546 1401</p>
-        <p><strong>Location:</strong> Cape Town South Africa</p>
-        <p><strong>Languages:</strong> English</p>
-      
-        <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/sachin-daya-7a4b33343?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BMCcOCCTsQgamoJsjsIi6Og%3D%3D" target="_blank" rel="noopener">$1
-        <!-- TODO: Replace with the full, exact LinkedIn URL (PDF truncated with …) -->
-        <p><strong>GitHub:</strong> <a href="https://github.com/yourusername" target="_blank" rel="noopener">github.com/yourusername</a></p>
-        <p class="note">For a contact form, use a service like Formspree or Netlify Forms and link it here.</p>
-      </div>
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3><i class="fas fa-microchip"></i> Technical Skills</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-check"></i> Hardware Installation</li>
+                        <li><i class="fas fa-check"></i> Software Development</li>
+                        <li><i class="fas fa-check"></i> MATLAB</li>
+                        <li><i class="fas fa-check"></i> Java</li>
+                        <li><i class="fas fa-check"></i> Python</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-tasks"></i> Professional Skills</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-check"></i> Project Management</li>
+                        <li><i class="fas fa-check"></i> Problem Solving</li>
+                        <li><i class="fas fa-check"></i> Technical Troubleshooting</li>
+                        <li><i class="fas fa-check"></i> Network Administration</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-users"></i> Soft Skills</h3>
+                    <ul class="skill-list">
+                        <li><i class="fas fa-check"></i> Communication</li>
+                        <li><i class="fas fa-check"></i> Public Speaking</li>
+                        <li><i class="fas fa-check"></i> Teamwork</li>
+                        <li><i class="fas fa-check"></i> Leadership</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </section>
 
-  </main>
+    <!-- Activities Section -->
+    <section id="activities">
+        <div class="container">
+            <h2 class="section-title">Extra-Curricular Activities</h2>
+            <div class="activity-item">
+                <h3>Scouts South Africa</h3>
+                <div class="date">February 2011 – August 2021</div>
+                <p>Springbok Award Recipient</p>
+                <p>Attended Lexden Patrol Leaders Training Unit</p>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    <div class="container">© <span id="year"></span> Sachin Daya. Built with GitHub Pages.</div>
-  </footer>
-
-  <script>
-    function toggleMenu(){
-      var m = document.getElementById('menu');
-      var s = getComputedStyle(m);
-      if (s.display === 'none') { m.style.display = 'flex'; } else { m.style.display = 'none'; }
-    }
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h3>Connect With Me</h3>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/sachin-daya-7a4b33343" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:sachin.dayat3@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p>Language: English</p>
+            <p>&copy; 2023 Sachin Daya. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
 
