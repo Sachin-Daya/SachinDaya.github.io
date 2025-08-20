@@ -23,11 +23,16 @@
             box-sizing: border-box;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: var(--text-color);
             background-color: #f9f9f9;
+            padding-top: 70px; /* Account for fixed navbar */
         }
         
         .container {
@@ -84,6 +89,61 @@
             width: 60px;
             height: 3px;
             background: var(--primary-color);
+        }
+        
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 25px;
+        }
+        
+        .nav-links a {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-social a {
+            margin-left: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
         
         /* Header Styles */
@@ -233,6 +293,30 @@
         
         /* Responsive Design */
         @media (max-width: 768px) {
+            .nav-links, .nav-social {
+                display: none;
+            }
+            
+            .menu-btn {
+                display: block;
+            }
+            
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active li {
+                margin: 10px 0;
+            }
+            
             .header-content h1 {
                 font-size: 2rem;
             }
@@ -248,17 +332,40 @@
     </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Sachin Daya</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#activities">Activities</a></li>
+                <li><a href="cv/Sachin_Daya_CV.pdf" target="_blank">CV</a></li>
+            </ul>
+            <div class="nav-social">
+                <a href="https://www.linkedin.com/in/sachin-daya-7a4b33343" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="mailto:sachin.daya13@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <div class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
     <!-- Header Section -->
     <header>
         <div class="container">
-            <img src="https://via.placeholder.com/180" alt="Sachin Daya" class="profile-img">
+            <img src="assets/portrait.jpg" alt="Sachin Daya" class="profile-img">
             <div class="header-content">
                 <h1>Sachin Daya</h1>
                 <h2>Electrical & Computer Engineering Student</h2>
                 <div class="contact-info">
                     <p><i class="fas fa-map-marker-alt"></i> Claremont, Cape Town, South Africa</p>
                     <p><i class="fas fa-phone"></i> 081 546 1401</p>
-                    <p><i class="fas fa-envelope"></i> sachin.dayat3@gmail.com</p>
+                    <p><i class="fas fa-envelope"></i> sachin.daya13@gmail.com</p>
                 </div>
             </div>
         </div>
@@ -381,12 +488,27 @@
             <h3>Connect With Me</h3>
             <div class="social-links">
                 <a href="https://www.linkedin.com/in/sachin-daya-7a4b33343" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:sachin.dayat3@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="mailto:sachin.daya13@gmail.com"><i class="fas fa-envelope"></i></a>
             </div>
             <p>Language: English</p>
             <p>&copy; 2023 Sachin Daya. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
 
